@@ -22,7 +22,6 @@ app.get('/numbers', async(req, res) => {
 
         const data = [];
         try{
-            console.log()
             await Promise.all(urls.forEach(async url => {
             try {
                 const response = await axios.get(url);
