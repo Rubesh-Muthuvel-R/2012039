@@ -5,11 +5,6 @@ const port = 8008
 
 const urlss = ["http://20.244.56.144/numbers/primes","http://20.244.56.144/numbers/fibo","http://20.244.56.144/numbers/odd","http://20.244.56.144/numbers/rand"]
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-});
-
-
 app.get('/numbers', async(req, res) => {
     const urlParams = req.query.url;
 
