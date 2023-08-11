@@ -17,32 +17,26 @@ app.get('/numbers', async(req, res) => {
         return res.status(400).json({ error: 'No URLs provided' });
     }
 
-    if(urlss.includes(req.query.url)){
+    if(urlss.includes(req.url)){
     const urls = Array.isArray(urlParams) ? urlParams : [urlParams];
+
         const data = [];
         try{
-            const responseData = await Promise.all(urls.map(async url => {
+            console.log()
+            await Promise.all(urls.forEach(async url => {
             try {
-
                 const response = await axios.get(url);
                 const numericData = response.data; 
 
                 data.push(numericData);
-                return {
-                    url,numericData
-                };
             } catch (error) {
-                return {
-                    error:"Not found"
-                };
             }
         }
         ))
 
         data.sort((a, b) => a - b);
         data = data.filter((value, index, self) => {return self.indexOf(value) === index;});
-
-        res.json(responseData);
+        res.json(data);
     }
     catch(err){
         res.status(500).json({error:"Serverside Error"});
